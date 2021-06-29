@@ -19,4 +19,7 @@ When you start the first time the "Small-GoShimmer-Wallet-2.exe" you will see an
 Click on the "Request Funds" button and then on "Balance" to update the balances.
 
 ## Trouble Shooting
-If for the files "wallet.dat" and "wallet.dat.bgp" are not generated, probably the connection to the noded failed and you can manually copy and paste them from the "Wallet-Files-If-Connection-Fails" folder to the same folder where the "config.json" and the "Small-GoShimmer-Wallet-2.exe" file are. Please be aware that these contains the SEED. So you would share this wallet with others having the same problem. You can later just delete the files and start the wallet again. It should be generated as soon as the the connection to the server issue isn't anymore.
+If for the files "wallet.dat" and "wallet.dat.bgp" are not generated, probably the connection to the noded failed and you can manually copy and paste them from the "Wallet-Files-If-Connection-Fails" folder to the same folder where the "config.json" and the "Small-GoShimmer-Wallet-2.exe" file are. Please be aware that these contains the SEED. So you would share this wallet with others having the same problem. This solution would not fix the conncection issue completely. The app coould still have problems to run smoothely.
+
+You can later just delete the files and restart the wallet again. The files should be generated as soon as the the connection to the server issue isn't anymore.
+Check the conncection again by contorlling if the files are generated automaticall by just restarting the wallet after deleting the "wallet.dat" and "wallet.dat.bgp" files.
