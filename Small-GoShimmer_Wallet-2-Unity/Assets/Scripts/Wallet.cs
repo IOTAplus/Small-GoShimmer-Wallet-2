@@ -32,6 +32,8 @@ public class Wallet : MonoBehaviour
     public GameObject assetGameobject;
     public GameObject nfttGameobject;
     public GameObject nftTitleGameobject;
+    public GameObject assetInNfttGameobject;
+
     public List<GameObject> gameobjectList;
 
     public NftData nftData;
@@ -39,6 +41,9 @@ public class Wallet : MonoBehaviour
     NFTDescription nftDescription;
     Image nftImage;
     Properties nftProperties;
+
+    string manaNodeUrl= "http://nodes.nectar.iota.cafe";
+    public int index;
 
 #if UNITY_STANDALONE_OSX
     private string path = Application.streamingAssetsPath + "/cli-wallet-mac";
@@ -69,6 +74,7 @@ public class Wallet : MonoBehaviour
         StartProcess("init");
     }
 
+
     public void RequestIotas()
     {
         StartProcess("request-funds");
@@ -81,6 +87,8 @@ public class Wallet : MonoBehaviour
         
         bool inNftLines = false;
         foreach (var gameObject in gameobjectList) { Destroy(gameObject); }
+        gameobjectList = new List<GameObject>();
+
 
         foreach (var line in balance.Split(new string[] { "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries))
         {
@@ -120,7 +128,7 @@ public class Wallet : MonoBehaviour
             {
                 // if line starts with space it is the buggy line
 
-                if (line.StartsWith("[ OK ]"))
+                if (line.StartsWith("[ OK ]") || line.StartsWith("[PEND]"))
                 {
                     //Console.WriteLine("hi");
                     var words = Regex.Split(line, @"\t").Where(s => s != String.Empty).ToArray<string>();
@@ -132,24 +140,53 @@ public class Wallet : MonoBehaviour
                     newObject.gameObject.GetComponent<AssetGameObjecScript>().nftBalance.text = words[2];
                     newObject.gameObject.GetComponent<AssetGameObjecScript>().nftTokenName.text = words[3];
                     newObject.gameObject.GetComponent<AssetGameObjecScript>().isNFT = true;
+                    newObject.gameObject.GetComponent<AssetGameObjecScript>().withdrawAssetinNFT = false;
+
                     newObject.gameObject.GetComponent<AssetGameObjecScript>().nftAmountToSend.GetComponent<InputField>().placeholder.GetComponent<Text>().text = "all";
                     newObject.gameObject.GetComponent<AssetGameObjecScript>().nftAmountToSend.GetComponent<InputField>().readOnly = true;
 
                 }
                 if (line.StartsWith("\t"))
                 {
-                    print("-------------------hi----------------------");
+                    print("-------------------hi----------------------"+"\n"+line);
 
                     var words = Regex.Split(line, @"\t").Where(s => s != String.Empty).ToArray<string>();
                     //Console.WriteLine("balance " + words[0] + " color " + words[1] + " name " + words[2]);
-                    var newObject = gameobjectList[gameobjectList.Count-1]; //Instantiate(nfttGameobject, assetGameobject.transform.parent);
-                    newObject.GetComponent<AssetGameObjecScript>().AssetInNFT.SetActive(true);
+                    //print("Amount of object in list: "+(gameobjectList.Count - 1).ToString());
+
+
+                   // for (int i = 0 ; i < (gameobjectList.Count-1); i++) {
+                     //   print(i.ToString());
+                       // try
+                        //{
+                          //  if (gameobjectList[i].gameObject.GetComponent<AssetGameObjecScript>().withdrawAssetinNFT == false)
+                           // {
+                            //    index = i;
+                            //    print("Index found maching == false: "+index.ToString());
+                            //}
+                        //}
+                        //catch { };
+                       
+                    //}
+
+                    var newObject2 = gameobjectList[gameobjectList.Count - 1].GetComponent<AssetGameObjecScript>().CreateNewAssetInNFTGameobject(); //Instantiate(nfttGameobject, assetGameobject.transform.parent);
+                                                                                                                                                    //print("Number of objects in generated object list: " + (gameobjectList.Count - 1).ToString());
+
+                    //var newObject2 = Instantiate(assetInNfttGameobject, newObject.transform.parent);
+                    //newObject2.SetActive(true);
+
+
+                    //newObject2.GetComponent<AssetGameObjecScript>().AssetInNFT.SetActive(true);
+
+                    string nftid = gameobjectList[gameobjectList.Count - 1].GetComponent<AssetGameObjecScript>().nftId.text;
+                   
                     //gameobjectList.Add(newObject);
-                    newObject.gameObject.GetComponent<AssetGameObjecScript>().color.text = words[1];
-                    newObject.gameObject.GetComponent<AssetGameObjecScript>().balance.text = words[0];
-                    newObject.gameObject.GetComponent<AssetGameObjecScript>().tokenName.text = words[2];
-                    //newObject.gameObject.GetComponent<AssetGameObjecScript>().isNFT = true;
-                    //newObject.gameObject.GetComponent<AssetGameObjecScript>().sendall = true;
+                    newObject2.gameObject.GetComponent<AssetGameObjecScript>().isNFT = true;
+                    newObject2.gameObject.GetComponent<AssetGameObjecScript>().withdrawAssetinNFT = true;
+                    newObject2.gameObject.GetComponent<AssetGameObjecScript>().nftIDString = nftid ;
+                    newObject2.gameObject.GetComponent<AssetGameObjecScript>().color.text = words[1];
+                    newObject2.gameObject.GetComponent<AssetGameObjecScript>().balance.text = words[0];
+                    newObject2.gameObject.GetComponent<AssetGameObjecScript>().tokenName.text = words[2];
 
                     //newObject.gameObject.GetComponent<AssetGameObjecScript>().amountToSend.GetComponent<InputField>().placeholder.GetComponent<Text>().text = "all";
                     //newObject.gameObject.GetComponent<AssetGameObjecScript>().amountToSend.GetComponent<InputField>().readOnly = true;
@@ -190,9 +227,11 @@ public class Wallet : MonoBehaviour
         StartProcess(x);
     }
 
-   // public void SendToken()
+  
+
+    // public void SendToken()
     //{
-      //  StartProcess("send-funds -amount " + amountToSend.text + " -dest-addr " + AddressWhereToSend.text + " -color " + colorToSend.text);
+    //  StartProcess("send-funds -amount " + amountToSend.text + " -dest-addr " + AddressWhereToSend.text + " -color " + colorToSend.text);
     //}
     public void GenerateNewAddress()
     {
