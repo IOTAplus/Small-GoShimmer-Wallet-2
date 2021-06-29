@@ -25,8 +25,14 @@ By default the address usage is configured to reusable. You can change that in t
 
 Click the button "New Address" to generate a new address. Just click again the "Last Address" button and paste it somewhere to see your new receiving address.
 
+## Where do I find the Scripts and the library
+
+To see the code please checck Small-GoShimmer-Wallet-2-Unity/Assets/Scripts
+To see the GoShimmer Cli-Wallet library please checck Small-GoShimmer-Wallet-2-Unity/Assets/StreamingAssets
+
 
 ## Trouble Shooting
+
 If for the files "wallet.dat" and "wallet.dat.bgp" are not generated, probably the connection to the noded failed and you can manually copy and paste them from the "Wallet-Files-If-Connection-Fails" folder to the same folder where the "config.json" and the "Small-GoShimmer-Wallet-2.exe" file are. Please be aware that these contains the SEED. So you would share this wallet with others having the same problem. This solution would not fix the conncection issue completely. The app coould still have problems to run smoothely.
 
 You can later just delete the files and restart the wallet again. The files should be generated as soon as the the connection to the server issue isn't anymore.
