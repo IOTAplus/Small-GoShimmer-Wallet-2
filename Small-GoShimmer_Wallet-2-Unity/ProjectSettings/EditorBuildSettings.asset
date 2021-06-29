@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/GoShimmerWallet.unity
+    guid: 292da9e7f30bc734ea16e5173d44c16a
   m_configObjects: {}
