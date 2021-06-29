@@ -5,7 +5,7 @@
 	  "username": "goshimmer",
 	  "password": "goshimmer"
 	},
-	"reuse_addresses": true,
+	"reuse_addresses": false,
 	"faucetPowDifficulty": 25,
 	"assetRegistryNetwork": "nectar"
 }
