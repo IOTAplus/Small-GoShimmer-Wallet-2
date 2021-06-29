@@ -27,7 +27,7 @@ Click the button "New Address" to generate a new address. Just click again the "
 
 ## Where do I find the Scripts and the library
 
-To see the code please checck Small-GoShimmer-Wallet-2-Unity/Assets/Scripts
+To see the code please checck Small-GoShimmer-Wallet-2-Unity/Assets/Scripts.
 To see the GoShimmer Cli-Wallet library please checck Small-GoShimmer-Wallet-2-Unity/Assets/StreamingAssets
 
 
