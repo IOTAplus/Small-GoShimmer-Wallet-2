@@ -13,10 +13,18 @@ At the first start you will notice that it will generate new files "config.json"
 There you can find some additional information about the configuration like the connected node, reusable address and generated seed.
 Check if all of these 3 files where generated and keep reeding the trouble shoot part if not.
 
-## How to use the Goshimmer Wallet with the Windows executable (.exe)
+## Request Funds and Balance
 
 When you start the first time the "Small-GoShimmer-Wallet-2.exe" you will see an empty wallet without any balance. 
 Click on the "Request Funds" button and then on "Balance" to update the balances.
+
+## My Address -reusable
+
+Just click the button "Last Address" to copy the last address to your clipboard. You can now paste your last address wherever you want. 
+By default the address usage is configured to reusable. You can change that in the "config.json" file.
+
+Click the button "New Address" to generate a new address. Just click again the "Last Address" button and paste it somewhere to see your new receiving address.
+
 
 ## Trouble Shooting
 If for the files "wallet.dat" and "wallet.dat.bgp" are not generated, probably the connection to the noded failed and you can manually copy and paste them from the "Wallet-Files-If-Connection-Fails" folder to the same folder where the "config.json" and the "Small-GoShimmer-Wallet-2.exe" file are. Please be aware that these contains the SEED. So you would share this wallet with others having the same problem. This solution would not fix the conncection issue completely. The app coould still have problems to run smoothely.
