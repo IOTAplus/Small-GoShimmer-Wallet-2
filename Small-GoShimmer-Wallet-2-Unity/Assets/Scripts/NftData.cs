@@ -13,24 +13,28 @@ public class NftData
     public string Type;
     public Properties Properties;
 }
-    [System.Serializable]
-    public class Name
-    {
-        public string Type;
-        public string Description;
-    }
-    [System.Serializable]
-    public class NFTDescription
-    {
-        public string Type;
-        public string Description;
-    }
-    [System.Serializable]
-    public class Image
-    {
-        public string Type;
-        public string Description;
-    }
+
+[System.Serializable]
+public class Name
+{
+    public string Type;
+    public string Description;
+}
+
+[System.Serializable]
+public class NFTDescription
+{
+    public string Type;
+    public string Description;
+}
+
+[System.Serializable]
+public class Image
+{
+    public string Type;
+    public string Description;
+}
+
 [System.Serializable]
 public class Properties
 {

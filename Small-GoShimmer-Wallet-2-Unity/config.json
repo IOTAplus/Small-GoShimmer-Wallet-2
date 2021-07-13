@@ -1,0 +1,11 @@
+{
+	"WebAPI": "http://nodes.nectar.iota.cafe",
+	"basic_auth": {
+	  "enabled": false,
+	  "username": "goshimmer",
+	  "password": "goshimmer"
+	},
+	"reuse_addresses": true,
+	"faucetPowDifficulty": 25,
+	"assetRegistryNetwork": "nectar"
+}

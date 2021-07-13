@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 
 public class AssetGameObjecScript : MonoBehaviour
@@ -15,6 +16,10 @@ public class AssetGameObjecScript : MonoBehaviour
     public Text balance;
     public Text tokenName;
 
+    public Text NFTTitle;
+    public Text NFTDescription;
+    public Text NFTIDataURLImage;
+
     public string nftIDString;
 
     public InputField nftAmountToSend;
@@ -23,6 +28,9 @@ public class AssetGameObjecScript : MonoBehaviour
     public InputField addressWhereToSend;
 
     public GameObject AssetInNFT;
+    public GameObject ImageGameobject;
+
+    public Renderer imageRenderer;
 
     public bool isNFT = false;
     public bool withdrawAssetinNFT = false;
@@ -112,5 +120,26 @@ public class AssetGameObjecScript : MonoBehaviour
     public void CopyToClipboardColor()
     {
         GUIUtility.systemCopyBuffer = color.text;
+    }
+
+    public void ImageDisplay()
+    {
+       StartCoroutine(GetTexture());
+        imageRenderer.material.color = Color.red;
+
+    }
+    IEnumerator GetTexture()
+    {
+       string MediaUrl="https://s20.directupload.net/images/210713/y25sow7c.jpg";
+        UnityWebRequest request = UnityWebRequestTexture.GetTexture(MediaUrl);
+        yield return request.SendWebRequest();
+        if (request.isNetworkError || request.isHttpError)
+            Debug.Log(request.error);
+        else
+            ImageGameobject.GetComponent<Renderer>().material.mainTexture = ((DownloadHandlerTexture)request.downloadHandler).texture;
+    
+
+            imageRenderer.material.color = Color.green;
+  
     }
 }

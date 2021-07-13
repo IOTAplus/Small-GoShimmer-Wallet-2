@@ -6,6 +6,8 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Linq;
 using System.Collections.Generic;
+using System.Net;
+using System.Text;
 
 [Serializable]
 public class Wallet : MonoBehaviour
@@ -67,6 +69,25 @@ public class Wallet : MonoBehaviour
         gameobjectList = new List<GameObject>();  
         InitWallet();
         GetBalance();
+    }
+
+    public NftData GetImmutableData(string nftAddress)
+    {
+        var NFTAddress = nftAddress;
+        
+        var url = "http://goshimmer.maikpiel.de:8080/ledgerstate/addresses/"+NFTAddress;
+        WebClient client = new WebClient();
+        string immutableNFTTextBase64 = client.DownloadString(url);
+        immutableNFTTextBase64 = immutableNFTTextBase64.Substring(immutableNFTTextBase64.IndexOf("immutableData\":") + 16);
+        immutableNFTTextBase64 = immutableNFTTextBase64.Substring(0, immutableNFTTextBase64.IndexOf("\""));
+        print(immutableNFTTextBase64);
+        byte[] data = Convert.FromBase64String(immutableNFTTextBase64);
+        string encodedImmutableString = Encoding.UTF8.GetString(data);
+        print(encodedImmutableString);
+
+        NftData nftData = JsonUtility.FromJson<NftData>(encodedImmutableString);
+        print(nftData.Properties.Image.Description);
+        return nftData;
     }
 
     public void InitWallet()
@@ -144,6 +165,13 @@ public class Wallet : MonoBehaviour
 
                     newObject.gameObject.GetComponent<AssetGameObjecScript>().nftAmountToSend.GetComponent<InputField>().placeholder.GetComponent<Text>().text = "all";
                     newObject.gameObject.GetComponent<AssetGameObjecScript>().nftAmountToSend.GetComponent<InputField>().readOnly = true;
+
+                    nftData = new NftData();
+                    nftData = GetImmutableData(words[1]);
+                    newObject.gameObject.GetComponent<AssetGameObjecScript>().NFTTitle.text = nftData.Properties.Name.Description;
+                    newObject.gameObject.GetComponent<AssetGameObjecScript>().NFTDescription.text = nftData.Properties.NFTDescription.Description;
+                    newObject.gameObject.GetComponent<AssetGameObjecScript>().NFTIDataURLImage.text = nftData.Properties.Image.Description;
+
 
                 }
                 if (line.StartsWith("\t"))
