@@ -319,13 +319,11 @@ public class Wallet : MonoBehaviour
     {
        
         gameObject.SetActive(false);
-        Canvas.ForceUpdateCanvases();
     }
 
     public void GameObjectON(GameObject gameObject)
     {
         gameObject.SetActive(true);
-        Canvas.ForceUpdateCanvases();
     }
 
     public void StartProcess(string order)
