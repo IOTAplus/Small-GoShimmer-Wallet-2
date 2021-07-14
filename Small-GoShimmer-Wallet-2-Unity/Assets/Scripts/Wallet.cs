@@ -17,9 +17,8 @@ public class Wallet : MonoBehaviour
     //public Color schwarz;
     //public Color grau;
     public Text responseText;
-    //public Text respondAddress;
-    //public Text unspendAddressTitel;
-    //public Text spendAddressTitel;
+
+  
 
     public GameObject scrollRectGameobject;
 
@@ -187,7 +186,7 @@ public class Wallet : MonoBehaviour
                     newObject.gameObject.GetComponent<AssetGameObjecScript>().NFTTitle.text = nftData.Properties.Name.Description;
                     newObject.gameObject.GetComponent<AssetGameObjecScript>().NFTDescription.text = nftData.Properties.NFTDescription.Description;
                     newObject.gameObject.GetComponent<AssetGameObjecScript>().NFTIDataURLImage.text = nftData.Properties.Image.Description;
-
+                 
 
                 }
                 if (line.StartsWith("\t"))

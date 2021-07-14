@@ -20,6 +20,9 @@ public class AssetGameObjecScript : MonoBehaviour
     public Text NFTDescription;
     public Text NFTIDataURLImage;
 
+    public Text NFTImageTitle;
+    public Text NFTImageDescription;
+
     public string nftIDString;
 
     public InputField nftAmountToSend;
@@ -39,6 +42,9 @@ public class AssetGameObjecScript : MonoBehaviour
     public GameObject assetInNFT;
 
     Wallet wallet;
+
+    public float correctedHeight;
+    public float correctedWidth;
 
     // Start is called before the first frame update
     void Start()
@@ -126,7 +132,7 @@ public class AssetGameObjecScript : MonoBehaviour
     {
        //StartCoroutine(GetTexture());
        imageRenderer.material.color = Color.red;
-       StartCoroutine(GetPlayerImage(NFTIDataURLImage.text));
+       StartCoroutine(GetNFTImage(NFTIDataURLImage.text));
     }
     IEnumerator GetTexture()
     {
@@ -141,19 +147,44 @@ public class AssetGameObjecScript : MonoBehaviour
 
         }
 
-    private IEnumerator GetPlayerImage(string url)
+    private IEnumerator GetNFTImage(string url)
     {
-       // string url = "
-          
+        // string url = "
 
+
+        NFTImageTitle.text = NFTTitle.text;
+        NFTImageDescription.text = NFTDescription.text;
         UnityWebRequest www = UnityWebRequestTexture.GetTexture(url);
         yield return www.SendWebRequest();
 
         Texture2D myTexture = DownloadHandlerTexture.GetContent(www);
+        print("Width: " + myTexture.width + " High: " + myTexture.height);
+        float maxWidth = 460;
+        float maxHigh = 460;
+        //int widthCorrection = maxWidth / myTexture.width ;
+        float highCorrection = maxHigh / myTexture.height;
+        float widthCorrection = maxWidth / myTexture.width;
+        
+
+      
+        print("HeighCorrection: "+ highCorrection+" CorrectedWidth: " + correctedWidth + " CorrectedHigh: " + correctedHeight);
 
         Rect rec = new Rect(0, 0, myTexture.width, myTexture.height);
         Sprite spriteToUse = Sprite.Create(myTexture, rec, new Vector2(0.5f, 0.5f), 100);
 
         ImageGameobject.sprite = spriteToUse;
+        
+        ImageGameobject.GetComponent<RectTransform>().localScale = new Vector3( widthCorrection*20,20*highCorrection);
+
+        correctedWidth = myTexture.width * highCorrection;
+        correctedHeight = myTexture.height * highCorrection;
+        
+        if (widthCorrection < 1)
+        {
+            correctedWidth = myTexture.width * widthCorrection;
+            correctedHeight = myTexture.height * widthCorrection;
+            print("Widthcorrection: " + widthCorrection + " CorrectedWidth: " + correctedWidth + " CorrectedHigh: " + correctedHeight);
+
+        }
     }
 }
