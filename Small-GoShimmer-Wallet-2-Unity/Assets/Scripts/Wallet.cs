@@ -21,7 +21,7 @@ public class Wallet : MonoBehaviour
     //public Text unspendAddressTitel;
     //public Text spendAddressTitel;
 
-    public ScrollRect scrollRect;
+    public GameObject scrollRectGameobject;
 
     public InputField tokenName;
     public InputField symbol;
@@ -82,7 +82,7 @@ public class Wallet : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
         yield return new WaitForEndOfFrame();
-        foreach (var scrollRect in scrollRect.GetComponentsInChildren<ScrollRect>())
+        foreach (var scrollRect in scrollRectGameobject.GetComponentsInChildren<ScrollRect>())
         {
             scrollRect.SetValue(0);
         }
@@ -96,7 +96,7 @@ public class Wallet : MonoBehaviour
         string immutableNFTTextBase64 = client.DownloadString(url);
         immutableNFTTextBase64 = immutableNFTTextBase64.Substring(immutableNFTTextBase64.IndexOf("immutableData\":") + 16);
         immutableNFTTextBase64 = immutableNFTTextBase64.Substring(0, immutableNFTTextBase64.IndexOf("\""));
-        print(immutableNFTTextBase64);
+
         byte[] data = Convert.FromBase64String(immutableNFTTextBase64);
         string encodedImmutableString = Encoding.UTF8.GetString(data);
         print(encodedImmutableString);
@@ -321,14 +321,12 @@ public class Wallet : MonoBehaviour
        
         gameObject.SetActive(false);
         Canvas.ForceUpdateCanvases();
-        scrollRect.verticalNormalizedPosition = Mathf.Clamp(scrollRect.verticalNormalizedPosition, 0f, 1f);
     }
 
     public void GameObjectON(GameObject gameObject)
     {
         gameObject.SetActive(true);
         Canvas.ForceUpdateCanvases();
-        scrollRect.verticalNormalizedPosition = Mathf.Clamp(scrollRect.verticalNormalizedPosition, 0f, 1f);
     }
 
     public void StartProcess(string order)
