@@ -28,7 +28,7 @@ public class AssetGameObjecScript : MonoBehaviour
     public InputField addressWhereToSend;
 
     public GameObject AssetInNFT;
-    public GameObject ImageGameobject;
+    public SpriteRenderer ImageGameobject;
 
     public Renderer imageRenderer;
 
@@ -112,9 +112,9 @@ public class AssetGameObjecScript : MonoBehaviour
         return newObject;
     }
 
-    public void CopyToClipboard()
+    public void CopyToClipboard(Text text)
     {
-        GUIUtility.systemCopyBuffer = nftId.text;
+        GUIUtility.systemCopyBuffer = text.text;//nftId.text;
     }
 
     public void CopyToClipboardColor()
@@ -124,22 +124,36 @@ public class AssetGameObjecScript : MonoBehaviour
 
     public void ImageDisplay()
     {
-       StartCoroutine(GetTexture());
-        imageRenderer.material.color = Color.red;
-
+       //StartCoroutine(GetTexture());
+       imageRenderer.material.color = Color.red;
+       StartCoroutine(GetPlayerImage(NFTIDataURLImage.text));
     }
     IEnumerator GetTexture()
     {
-       string MediaUrl="https://s20.directupload.net/images/210713/y25sow7c.jpg";
-        UnityWebRequest request = UnityWebRequestTexture.GetTexture(MediaUrl);
-        yield return request.SendWebRequest();
-        if (request.isNetworkError || request.isHttpError)
-            Debug.Log(request.error);
-        else
-            ImageGameobject.GetComponent<Renderer>().material.mainTexture = ((DownloadHandlerTexture)request.downloadHandler).texture;
-    
+       string url="https://s20.directupload.net/images/210713/y25sow7c.jpg";
+        Debug.Log("Loading ....");
+        WWW wwwLoader = new WWW(url);   // create WWW object pointing to the url
+        yield return wwwLoader;         // start loading whatever in that url ( delay happens here )
 
-            imageRenderer.material.color = Color.green;
-  
+        Debug.Log("Loaded");
+        imageRenderer.material.color = Color.white;              // set white
+        imageRenderer.material.mainTexture = wwwLoader.texture;  // set loaded image
+
+        }
+
+    private IEnumerator GetPlayerImage(string url)
+    {
+       // string url = "
+          
+
+        UnityWebRequest www = UnityWebRequestTexture.GetTexture(url);
+        yield return www.SendWebRequest();
+
+        Texture2D myTexture = DownloadHandlerTexture.GetContent(www);
+
+        Rect rec = new Rect(0, 0, myTexture.width, myTexture.height);
+        Sprite spriteToUse = Sprite.Create(myTexture, rec, new Vector2(0.5f, 0.5f), 100);
+
+        ImageGameobject.sprite = spriteToUse;
     }
 }

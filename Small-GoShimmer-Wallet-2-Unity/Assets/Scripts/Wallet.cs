@@ -8,6 +8,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Net;
 using System.Text;
+using System.Collections;
 
 [Serializable]
 public class Wallet : MonoBehaviour
@@ -19,6 +20,8 @@ public class Wallet : MonoBehaviour
     //public Text respondAddress;
     //public Text unspendAddressTitel;
     //public Text spendAddressTitel;
+
+    public ScrollRect scrollRect;
 
     public InputField tokenName;
     public InputField symbol;
@@ -70,7 +73,20 @@ public class Wallet : MonoBehaviour
         InitWallet();
         GetBalance();
     }
+    void Awake()
+    {
+        StartCoroutine(FixScrollRects());
+    }
 
+    public IEnumerator FixScrollRects()
+    {
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+        foreach (var scrollRect in scrollRect.GetComponentsInChildren<ScrollRect>())
+        {
+            scrollRect.SetValue(0);
+        }
+    }
     public NftData GetImmutableData(string nftAddress)
     {
         var NFTAddress = nftAddress;
@@ -302,13 +318,19 @@ public class Wallet : MonoBehaviour
 
     public void GameObjectOFF(GameObject gameObject)
     {
+       
         gameObject.SetActive(false);
+        Canvas.ForceUpdateCanvases();
+        scrollRect.verticalNormalizedPosition = Mathf.Clamp(scrollRect.verticalNormalizedPosition, 0f, 1f);
     }
 
     public void GameObjectON(GameObject gameObject)
     {
         gameObject.SetActive(true);
+        Canvas.ForceUpdateCanvases();
+        scrollRect.verticalNormalizedPosition = Mathf.Clamp(scrollRect.verticalNormalizedPosition, 0f, 1f);
     }
+
     public void StartProcess(string order)
     {
         Process process = new Process();
