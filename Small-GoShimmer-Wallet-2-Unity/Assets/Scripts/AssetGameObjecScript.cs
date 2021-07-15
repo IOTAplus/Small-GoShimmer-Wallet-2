@@ -46,6 +46,12 @@ public class AssetGameObjecScript : MonoBehaviour
     public float correctedHeight;
     public float correctedWidth;
 
+
+    [SerializeField]
+    private UniGifImage m_uniGifImage;
+
+    private bool m_mutex;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -132,20 +138,29 @@ public class AssetGameObjecScript : MonoBehaviour
     {
        //StartCoroutine(GetTexture());
        imageRenderer.material.color = Color.red;
-       StartCoroutine(GetNFTImage(NFTIDataURLImage.text));
-    }
-    IEnumerator GetTexture()
-    {
-       string url="https://s20.directupload.net/images/210713/y25sow7c.jpg";
-        Debug.Log("Loading ....");
-        WWW wwwLoader = new WWW(url);   // create WWW object pointing to the url
-        yield return wwwLoader;         // start loading whatever in that url ( delay happens here )
+        try
+        {
+            if (m_mutex || m_uniGifImage == null || string.IsNullOrEmpty(NFTIDataURLImage.text))
+            {
+                return;
+            }
 
-        Debug.Log("Loaded");
-        imageRenderer.material.color = Color.white;              // set white
-        imageRenderer.material.mainTexture = wwwLoader.texture;  // set loaded image
-
+            m_mutex = true;
+            StartCoroutine(ViewGifCoroutine());
         }
+        catch
+        {
+            StartCoroutine(GetNFTImage(NFTIDataURLImage.text));
+        }
+      
+    }
+  
+
+    private IEnumerator ViewGifCoroutine()
+    {
+        yield return StartCoroutine(m_uniGifImage.SetGifFromUrlCoroutine(NFTIDataURLImage.text));
+        m_mutex = false;
+    }
 
     private IEnumerator GetNFTImage(string url)
     {
@@ -158,6 +173,7 @@ public class AssetGameObjecScript : MonoBehaviour
         yield return www.SendWebRequest();
 
         Texture2D myTexture = DownloadHandlerTexture.GetContent(www);
+
         print("Width: " + myTexture.width + " High: " + myTexture.height);
         float maxWidth = 460;
         float maxHigh = 460;
@@ -165,26 +181,26 @@ public class AssetGameObjecScript : MonoBehaviour
         float highCorrection = maxHigh / myTexture.height;
         float widthCorrection = maxWidth / myTexture.width;
         
-
-      
-        print("HeighCorrection: "+ highCorrection+" CorrectedWidth: " + correctedWidth + " CorrectedHigh: " + correctedHeight);
-
         Rect rec = new Rect(0, 0, myTexture.width, myTexture.height);
         Sprite spriteToUse = Sprite.Create(myTexture, rec, new Vector2(0.5f, 0.5f), 100);
 
         ImageGameobject.sprite = spriteToUse;
-        
-        ImageGameobject.GetComponent<RectTransform>().localScale = new Vector3( widthCorrection*20,20*highCorrection);
+                
+        ImageGameobject.GetComponent<RectTransform>().localScale = new Vector3(highCorrection * 20, 20 * highCorrection);
 
-        correctedWidth = myTexture.width * highCorrection;
-        correctedHeight = myTexture.height * highCorrection;
-        
+
+        //correctedWidth = myTexture.width * highCorrection;
+        //correctedHeight = myTexture.height * highCorrection;
+
+        print("HeighCorrection: "+ highCorrection+" CorrectedWidth: " + correctedWidth + " CorrectedHigh: " + correctedHeight);
+
         if (widthCorrection < 1)
         {
-            correctedWidth = myTexture.width * widthCorrection;
-            correctedHeight = myTexture.height * widthCorrection;
+            //correctedWidth = myTexture.width * widthCorrection;
+            //correctedHeight = myTexture.height * widthCorrection;
             print("Widthcorrection: " + widthCorrection + " CorrectedWidth: " + correctedWidth + " CorrectedHigh: " + correctedHeight);
-
+            ImageGameobject.GetComponent<RectTransform>().localScale = new Vector3(widthCorrection * 20, 20 * widthCorrection);
         }
+
     }
 }
