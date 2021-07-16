@@ -126,7 +126,8 @@ public class AssetGameObjecScript : MonoBehaviour
 
     public void CopyToClipboard(Text text)
     {
-        GUIUtility.systemCopyBuffer = text.text;//nftId.text;
+        string s = text.text;
+        GUIUtility.systemCopyBuffer =s;
     }
 
     public void CopyToClipboardColor()
