@@ -33,7 +33,7 @@ public class AssetGameObjecScript : MonoBehaviour
     public GameObject AssetInNFT;
     public SpriteRenderer ImageGameobject;
 
-    public Renderer imageRenderer;
+    public GameObject NFTImageGameobject;
 
     public bool isNFT = false;
     public bool withdrawAssetinNFT = false;
@@ -46,7 +46,7 @@ public class AssetGameObjecScript : MonoBehaviour
     public float correctedHeight;
     public float correctedWidth;
 
-
+    public GameObject RawImage;
     [SerializeField]
     private UniGifImage m_uniGifImage;
 
@@ -62,8 +62,8 @@ public class AssetGameObjecScript : MonoBehaviour
     public void SendToken()
     {
         if (isNFT == false)
-        { 
-                wallet.StartProcess("send-funds -amount " + Convert.ToUInt32(anmountToSend.text) + " -dest-addr " + addressWhereToSend.text + " -color " + color.text);
+        {
+            wallet.StartProcess("send-funds -amount " + Convert.ToUInt32(anmountToSend.text) + " -dest-addr " + addressWhereToSend.text + " -color " + color.text);
         }
 
         if (isNFT == true)
@@ -109,7 +109,7 @@ public class AssetGameObjecScript : MonoBehaviour
 
     public void SweepNFTOwnedNFTs()
     {
-        wallet.StartProcess("sweep-nft-owned-nfts -id "+ nftId.text);
+        wallet.StartProcess("sweep-nft-owned-nfts -id " + nftId.text);
     }
 
     public void DestroyNFT()
@@ -136,71 +136,80 @@ public class AssetGameObjecScript : MonoBehaviour
 
     public void ImageDisplay()
     {
-       //StartCoroutine(GetTexture());
-       imageRenderer.material.color = Color.red;
-        try
-        {
-            if (m_mutex || m_uniGifImage == null || string.IsNullOrEmpty(NFTIDataURLImage.text))
-            {
-                return;
-            }
+        NFTImageTitle.text = NFTTitle.text;
+        NFTImageDescription.text = NFTDescription.text;
 
-            m_mutex = true;
-            StartCoroutine(ViewGifCoroutine());
-        }
-        catch
+
+        MethodExtension.gif = true;
+        RawImage.SetActive(true);
+        ImageGameobject.sprite = null;
+
+        if (m_mutex || m_uniGifImage == null || string.IsNullOrEmpty(NFTIDataURLImage.text))
         {
-            StartCoroutine(GetNFTImage(NFTIDataURLImage.text));
+
+            return;
         }
-      
+
+        m_mutex = true;
+        StartCoroutine(ViewGifCoroutine());
+
     }
-  
 
     private IEnumerator ViewGifCoroutine()
     {
+        IEnumerator x;
         yield return StartCoroutine(m_uniGifImage.SetGifFromUrlCoroutine(NFTIDataURLImage.text));
         m_mutex = false;
+
+        float height = RawImage.GetComponent<RectTransform>().rect.height;
+        float width = RawImage.GetComponent<RectTransform>().rect.width;
+
+        Resize(height, width,90,130, Convert.ToSingle(0.25) , RawImage);
+        //print("Height: " + height+" Width: "+width);
+        if (MethodExtension.gif == false)
+        {
+            RawImage.SetActive(false);
+            StartCoroutine(GetNFTImage());
+        }
     }
 
-    private IEnumerator GetNFTImage(string url)
+    private IEnumerator GetNFTImage()
     {
         // string url = "
+        print("GET NFT ÌMAGE STARTED");
 
 
-        NFTImageTitle.text = NFTTitle.text;
-        NFTImageDescription.text = NFTDescription.text;
-        UnityWebRequest www = UnityWebRequestTexture.GetTexture(url);
+        UnityWebRequest www = UnityWebRequestTexture.GetTexture(NFTIDataURLImage.text);
         yield return www.SendWebRequest();
 
         Texture2D myTexture = DownloadHandlerTexture.GetContent(www);
 
-        print("Width: " + myTexture.width + " High: " + myTexture.height);
-        float maxWidth = 460;
-        float maxHigh = 460;
+
         //int widthCorrection = maxWidth / myTexture.width ;
-        float highCorrection = maxHigh / myTexture.height;
-        float widthCorrection = maxWidth / myTexture.width;
-        
+
+
         Rect rec = new Rect(0, 0, myTexture.width, myTexture.height);
         Sprite spriteToUse = Sprite.Create(myTexture, rec, new Vector2(0.5f, 0.5f), 100);
 
         ImageGameobject.sprite = spriteToUse;
-                
-        ImageGameobject.GetComponent<RectTransform>().localScale = new Vector3(highCorrection * 20, 20 * highCorrection);
 
+        Resize(myTexture.height, myTexture.width,90,130, 20, NFTImageGameobject);
 
-        //correctedWidth = myTexture.width * highCorrection;
-        //correctedHeight = myTexture.height * highCorrection;
+        //print("HeighCorrection: "+ highCorrection+" CorrectedWidth: " + correctedWidth + " CorrectedHigh: " + correctedHeight);
+    }
 
-        print("HeighCorrection: "+ highCorrection+" CorrectedWidth: " + correctedWidth + " CorrectedHigh: " + correctedHeight);
+    public void Resize(float height, float width,float maxHeight,float maxWidth, float currentScale, GameObject gameObject)
+    {
+        float highCorrection = 300 / height;
+        float widthCorrection = 450 / width;
+        print("Width: " + width + " High: " + height + " CurrentScale: " + currentScale + " + HighCorrection: " + highCorrection);
+
+        gameObject.GetComponent<RectTransform>().localScale = new Vector3(currentScale * highCorrection, currentScale * highCorrection);
 
         if (widthCorrection < 1)
         {
-            //correctedWidth = myTexture.width * widthCorrection;
-            //correctedHeight = myTexture.height * widthCorrection;
-            print("Widthcorrection: " + widthCorrection + " CorrectedWidth: " + correctedWidth + " CorrectedHigh: " + correctedHeight);
-            ImageGameobject.GetComponent<RectTransform>().localScale = new Vector3(widthCorrection * 20, 20 * widthCorrection);
+            print("Width: " + width + " CurrentScale: " + currentScale + " + WitdhCorrection: " + widthCorrection);
+            gameObject.GetComponent<RectTransform>().localScale = new Vector3(currentScale * widthCorrection, currentScale * widthCorrection);
         }
-
     }
 }

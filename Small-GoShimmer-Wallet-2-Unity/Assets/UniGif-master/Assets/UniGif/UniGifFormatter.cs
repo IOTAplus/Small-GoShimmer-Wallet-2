@@ -36,6 +36,8 @@ public static partial class UniGif
         if (SetGifHeader(gifBytes, ref byteIndex, ref gifData) == false)
         {
             Debug.LogError("GIF header set error.");
+            MethodExtension.gif = false;
+
             return false;
         }
 
@@ -60,6 +62,7 @@ public static partial class UniGif
         if (gifBytes[0] != 'G' || gifBytes[1] != 'I' || gifBytes[2] != 'F')
         {
             Debug.LogError("This is not GIF image.");
+            MethodExtension.gif = false;
             return false;
         }
         gifData.m_sig0 = gifBytes[0];
@@ -72,6 +75,7 @@ public static partial class UniGif
             (gifBytes[3] != '8' || gifBytes[4] != '9' || gifBytes[5] != 'a'))
         {
             Debug.LogError("GIF version error.\nSupported only GIF87a or GIF89a.");
+            MethodExtension.gif = false;
             return false;
         }
         gifData.m_ver0 = gifBytes[3];

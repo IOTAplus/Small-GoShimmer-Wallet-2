@@ -190,6 +190,7 @@ public class UniGifImage : MonoBehaviour
         if (string.IsNullOrEmpty(url))
         {
             Debug.LogError("URL is nothing.");
+            MethodExtension.gif = false;
             yield break;
         }
 
@@ -253,6 +254,8 @@ public class UniGifImage : MonoBehaviour
                 else
                 {
                     Debug.LogError("Gif texture get error.");
+                    MethodExtension.gif = false;
+
                     nowState = State.None;
                 }
             },

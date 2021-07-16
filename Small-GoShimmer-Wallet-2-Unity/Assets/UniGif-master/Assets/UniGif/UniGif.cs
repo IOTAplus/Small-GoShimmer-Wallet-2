@@ -37,6 +37,8 @@ public static partial class UniGif
         if (SetGifData(bytes, ref gifData, debugLog) == false)
         {
             Debug.LogError("GIF file data set error.");
+            MethodExtension.gif = false;
+
             if (callback != null)
             {
                 callback(null, loopCount, width, height);

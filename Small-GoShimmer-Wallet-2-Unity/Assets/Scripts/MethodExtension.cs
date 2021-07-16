@@ -8,6 +8,9 @@ using UnityEngine.UI;
 public static class MethodExtension
 {
     // Start is called before the first frame update
+
+    public static bool gif = true;
+
     public static IEnumerable<string> SplitByLine(this string str)
     {
         return Regex
