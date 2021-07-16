@@ -292,7 +292,7 @@ public class Wallet : MonoBehaviour
         string lastAddress = responseText.text;
 
         lastAddress = lastAddress.Substring(lastAddress.IndexOf("Latest Receive Address: ")+24);
-
+        lastAddress = lastAddress.Substring(0, 45);
         GUIUtility.systemCopyBuffer = lastAddress;
 
     }

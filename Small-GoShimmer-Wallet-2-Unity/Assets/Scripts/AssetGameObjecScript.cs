@@ -59,17 +59,15 @@ public class AssetGameObjecScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void SendToken()
+    public void SendFunds()
     {
         if (isNFT == false)
         {
             wallet.StartProcess("send-funds -amount " + Convert.ToUInt32(anmountToSend.text) + " -dest-addr " + addressWhereToSend.text + " -color " + color.text);
         }
+    }
 
-        if (isNFT == true)
-        {
-            if (withdrawAssetinNFT == true)
-            {
+    public void WithdrawFromNFT() { 
 
                 print(nftIDString);
                 print(addressWhereToSend.text);
@@ -80,7 +78,7 @@ public class AssetGameObjecScript : MonoBehaviour
                 // wallet.StartProcess("transfer-nft" + " -dest-addr " + nftAddressWhereToSend.text + " -id " + nftId.text);
 
             }
-            else
+            public void TransferNFT()
             {
                 //var balanceSplit = Regex.Split(nftBalance.text, @" ").Where(s => s != String.Empty).ToArray<string>();
                 //for (int i = 0; i < balanceSplit.Length; i++)
@@ -93,16 +91,12 @@ public class AssetGameObjecScript : MonoBehaviour
                 wallet.StartProcess("transfer-nft" + " -dest-addr " + nftAddressWhereToSend.text + " -id " + nftId.text); //transfer the ownership of an nft
             }
 
-        }
-    }
+        
 
-    public void SendFunds()
-    {
-        wallet.StartProcess("send-funds -amount " + Convert.ToUInt32(anmountToSend.text) + " -dest-addr " + addressWhereToSend.text + " -color " + color.text);
-    }
 
     public void DepositToNFT()
     {
+        // Assets to NFT
         wallet.StartProcess("deposit-to-nft -amount " + Convert.ToUInt32(anmountToSend.text) + " -id " + addressWhereToSend.text + " -color " + color.text); //withdraw funds from an nft
     }
 
