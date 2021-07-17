@@ -100,12 +100,20 @@ public class AssetGameObjecScript : MonoBehaviour
         wallet.StartProcess("deposit-to-nft -amount " + Convert.ToUInt32(anmountToSend.text) + " -id " + addressWhereToSend.text + " -color " + color.text); //withdraw funds from an nft
     }
 
-
+    public void SweepNFTownedFunds()
+    {
+        wallet.StartProcess("sweep-nft-owned-funds -id " + nftId.text); 
+    }
     public void SweepNFTOwnedNFTs()
     {
         wallet.StartProcess("sweep-nft-owned-nfts -id " + nftId.text);
     }
 
+    public void ConsolidateFunds()
+    {
+        wallet.StartProcess("consolidate-funds");
+
+    }
     public void DestroyNFT()
     {
         wallet.StartProcess("destroy-nft -id " + nftId.text);
