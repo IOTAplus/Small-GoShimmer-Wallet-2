@@ -49,15 +49,15 @@ public class Wallet : MonoBehaviour
     string manaNodeUrl= "http://nodes.nectar.iota.cafe";
     public int index;
 
-#if UNITY_STANDALONE_OSX
+#if UNITY_STANDALONE_OSX || UNITY_EDITOR_OSX
     private string path = Application.streamingAssetsPath + "/cli-wallet-mac";
 #endif
 
-#if UNITY_STANDALONE_WIN
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
     private string path = Application.streamingAssetsPath + "/cli-wallet-win.exe";
 #endif
-#if UNITY_STANDALONE_LIN
-    private string path = Application.streamingAssetsPath + "/cli-wallet-lin.";
+#if UNITY_STANDALONE_LINUX || UNITY_EDITOR_LINUX
+    private string path = Application.streamingAssetsPath + "/cli-wallet-linux";
 #endif
 
     public void Start()
@@ -328,6 +328,7 @@ public class Wallet : MonoBehaviour
 
     public void StartProcess(string order)
     {
+	    print (order);
         Process process = new Process();
         process.StartInfo.FileName = path;
         process.StartInfo.Arguments = order;
