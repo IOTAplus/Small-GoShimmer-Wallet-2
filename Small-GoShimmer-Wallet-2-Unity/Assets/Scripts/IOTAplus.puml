@@ -1,0 +1,77 @@
+@startuml
+
+interface ILedgerAPI
+{
+	void GetBalance ();
+	UnityEvent GetBalanceSuccess { get; }
+	UnityEvent GetBalanceFailure { get; }
+}
+
+class LedgerAPIBase {}
+
+class DummyLedger
+{
+    private void Start
+}
+
+class GoShimmerCLI083 {}
+
+ILedgerAPI    <|-- LedgerAPIBase
+LedgerAPIBase <|-- DummyLedger
+LedgerAPIBase <|-- GoShimmerCLI083
+
+
+
+
+
+
+
+
+interface IWallet
+{
+	List <Dictionary<string, string>> CoinBalances { get; }
+	List <Dictionary<string, string>> OwnedNFTs    { get; }
+
+	string CoinBalancesJson { get; }
+	string OwnedNFTsJson    { get; }
+
+	bool SetCoinBalances (List<Dictionary<string, string>> newCoinBalances);
+	bool SetOwnedNfts (List<Dictionary<string, string>>    newOwnedNfts);
+}
+
+class Wallet
+{
+	 protected List<Dictionary<string, string>> _coinBalances;
+	 List<Dictionary<string, string>> _ownedNfTs;
+}
+
+IWallet <|-- Wallet
+
+
+
+
+'https://plantuml.com/class-diagram
+abstract class AbstractList
+abstract AbstractCollection
+interface List
+interface Collection
+
+List <|-- AbstractList
+Collection <|-- AbstractCollection
+
+Collection <|- List
+AbstractCollection <|- AbstractList
+AbstractList <|-- ArrayList
+
+class ArrayList {
+Object[] elementData
+size()
+}
+
+enum TimeUnit {
+DAYS
+HOURS
+MINUTES
+}
+
+@enduml

@@ -89,7 +89,7 @@ public static partial class UniGif
 
         public void Dump()
         {
-            Debug.Log("GIF Type: " + signature + "-" + version);
+            Debug.Log("GIF nftType: " + signature + "-" + version);
             Debug.Log("Image Size: " + m_logicalScreenWidth + "x" + m_logicalScreenHeight);
             Debug.Log("Animation Image Count: " + m_imageBlockList.Count);
             Debug.Log("Animation Loop Count (0 is infinite): " + m_appEx.loopCount);

@@ -5,19 +5,11 @@ using System.IO;
 
 public class JsonDataManager : MonoBehaviour
 {
-
     // Create a field for the save file.
-    string saveFile;
+    [SerializeField]
+    private string saveFile = Application.persistentDataPath + "/nftData.json";
+
     public NftData nftData;
-
-
-    void Awake()
-    {
-               
-        saveFile = Application.persistentDataPath + "/nftData.json";
-       // WriteFile();
-       // ReadFile();
-    }
 
     public void ReadFile()
     {

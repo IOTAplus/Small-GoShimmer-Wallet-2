@@ -5456,7 +5456,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 32.299988}
+  m_AnchoredPosition: {x: 0, y: 32.30005}
   m_SizeDelta: {x: 0, y: 64.6148}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &920923221
@@ -14137,7 +14137,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 400, y: 0}
+  m_AnchoredPosition: {x: 399.99997, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2085228733
@@ -14505,14 +14505,14 @@ MonoBehaviour:
     Title: 
     Type: 
     Properties:
-      Name:
-        Type: 
+      nftName:
+        nftType: 
         Description: 
-      NFTDescription:
-        Type: 
+      nftDescription:
+        nftType: 
         Description: 
-      Image:
-        Type: 
+      nftImage:
+        nftType: 
         Description: 
   index: 0
 --- !u!4 &2131743966
@@ -14541,18 +14541,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39df58223ed58a74ab56cff00ea30a71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  saveFile: 
   nftData:
     Title: 
     Type: 
     Properties:
-      Name:
-        Type: 
+      nftName:
+        nftType: 
         Description: 
-      NFTDescription:
-        Type: 
+      nftDescription:
+        nftType: 
         Description: 
-      Image:
-        Type: 
+      nftImage:
+        nftType: 
         Description: 
 --- !u!1 &2132830862
 GameObject:
@@ -18197,7 +18198,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -2.571228}
+  m_AnchoredPosition: {x: 0, y: -2.571289}
   m_SizeDelta: {x: 0, y: -124.79059}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &3922852019629585031
