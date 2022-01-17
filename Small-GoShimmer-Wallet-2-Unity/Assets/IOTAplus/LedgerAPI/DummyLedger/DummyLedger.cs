@@ -23,7 +23,7 @@ namespace IOTAplus.LedgerAPI.DummyLedger
 		public override void GetBalance ()
 		{
 			Debug.Log ("DummyLedger.GetBalance");
-			var result = new List<Dictionary<string, string>> ()
+			var coinBalances = new List<Dictionary<string, string>> ()
 			{
 				new Dictionary<string, string> ()
 				{
@@ -41,9 +41,37 @@ namespace IOTAplus.LedgerAPI.DummyLedger
 				}
 			};
 
-			_wallet.SetCoinBalances (result);
-			
-			//TODO Add dummy NFT data.
+			_wallet.SetCoinBalances (coinBalances);
+
+			var OwnedNFTs = new List<Dictionary<string, string>> ()
+			{
+					new Dictionary<string, string> ()
+					{
+							{ "STATUS", "[ OK ]" },
+							{ "NFT ID (ALIAS ID)", "oWXs55vniGwbh5Fg73yJWdpKSWXCJMkvTzUHpgA7tfTF" },
+							{ "BALANCE", "14 I" },
+							{ "COLOR", "IOTA" },
+							{ "TOKEN NAME", "IOTA" }
+					},
+					new Dictionary<string, string> ()
+					{
+							{ "STATUS", "[ OK ]" },
+							{ "NFT ID (ALIAS ID)", "qEZFqHefW2aoi8CW3axgk6kueWGpGdH4iZq9gUP3Q7wr" },
+							{ "BALANCE", "105 I" },
+							{ "COLOR", "IOTA" },
+							{ "TOKEN NAME", "IOTA" }
+					},
+					new Dictionary<string, string> ()
+					{
+							{ "STATUS", "[ OK ]" },
+							{ "NFT ID (ALIAS ID)", "jzk4JDY2XHJQR5LMMX87HPYYjiTYdSvq74oPAoxakVpk" },
+							{ "BALANCE", "83 I" },
+							{ "COLOR", "IOTA" },
+							{ "TOKEN NAME", "IOTA" }
+					},
+			};
+
+			_wallet.SetOwnedNfts (OwnedNFTs);
 			
 			_OnGetBalanceSuccess?.Invoke ();
 		}

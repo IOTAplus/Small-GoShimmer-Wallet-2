@@ -11,6 +11,7 @@ namespace IOTAplus.LedgerAPI.Wallet
 	{
 		private IWallet       _wallet;
 		private LedgerAPIBase _ledger;
+		private Text          _display;
 
 		private void Awake ()
 		{
@@ -19,25 +20,24 @@ namespace IOTAplus.LedgerAPI.Wallet
 
 			_ledger = FindObjectOfType<LedgerAPIBase> ();
 			if (_ledger == null) Debug.LogError ("Cannot find Ledger API.");
+
+			_display = GetComponent<Text> ();
+			if (_display == null) Debug.LogError ("Cannot find Text component.");
 		}
 
-		/// <summary>
-		/// WalletCoinBalanaceJson sets the text of a Text component to a JSON representation of
-		/// a wallet's coin balance. The Text component must be on the same GameObject.
-		/// The wallet must be of type IOTAplus.LedgerAPI.Wallet.Wallet.
-		/// </summary>
+		
+		// These Json methods set the text of a Text component to a JSON representation
+		// of a wallet's data. The Text component must be on the same GameObject.
+		// The wallet must be of type IOTAplus.LedgerAPI.Wallet.Wallet.
+		
 		public void WalletCoinBalanceJson ()
 		{
-			Debug.Log ("Setting Balance in UI.");
-			if (_wallet == null)
-				_wallet = FindObjectOfType<Wallet> ();
+			_display.text = _wallet.CoinBalancesJson;
+		}
 
-			var display = GetComponent<Text> ();
-			
-			if (display != null)
-				display.text = _wallet.CoinBalancesJson;
-			else
-				Debug.Log (string.Concat("Display Text Not Found.\n", _wallet.CoinBalancesJson));
+		public void WalletOwnedNFTsJson ()
+		{
+			_display.text = _wallet.OwnedNFTsJson;
 		}
 	}
 }

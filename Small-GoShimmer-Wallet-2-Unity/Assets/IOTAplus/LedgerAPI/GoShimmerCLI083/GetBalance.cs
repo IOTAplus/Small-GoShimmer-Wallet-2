@@ -48,8 +48,7 @@ namespace IOTAplus.LedgerAPI.GoShimmerCLI083
 		private void ParseBalanceOutput (string balanceOutput)
 		{ 
 /*
-			Example output for "Balance" command
-			======================================================================================================
+			>>> Example output for "Balance" command >>>
 			 
 			IOTA 2.0 DevNet CLI -Wallet 0.2
       Fetching balance...
@@ -103,115 +102,95 @@ namespace IOTAplus.LedgerAPI.GoShimmerCLI083
 						continue;
 				}
 
-				if (!inNftLines)
+				// Split the line at each tab, into an array of strings, discarding empty strings.
+				var words = Regex.Split (line, @"\t").Where (s => s != String.Empty).ToArray<string> ();
+				
+				// Use these lines to log each line after splitting.
+				//string log = "Entry:\n";
+				//foreach (var t in words) { log = string.Concat (log, t, "\n"); }
+				//Debug.Log(log);
+
+				if (CheckForHeadings (lineStart, headings, words)) continue;
+
+				ParseBalanceEntry (words, headings, workingList);
+
+				if (inNftLines && line.StartsWith ("\t"))
 				{
-					// Split the line at each tab, into an array of strings, discarding empty strings.
-					var words = Regex.Split (line, @"\t").Where (s => s != String.Empty).ToArray<string> ();
+					words = Regex.Split (line, @"\t").Where (s => s != String.Empty).ToArray<string> ();
 
-					// Extract the heading line of the table, to use as field names in the dictionary.
-					if (string.Equals (lineStart, fieldNames))
-					{
-						headings.Clear ();
-						foreach (var s in words) headings.Add (s);
-						continue;
-					}
+					//Console.WriteLine("balanceOutput " + words[0] + " color " + words[1] + " name " + words[2]);
+					//print("Amount of object in list: "+(gameobjectList.Count - 1).ToString());
 
-					// Add a new, blank entry to the end of workingList.
-					workingList.Add (new Dictionary<string, string> ());
+					// for (int i = 0 ; i < (gameobjectList.Count-1); i++) {
+					//   print(i.ToString());
+					// try
+					//{
+					//  if (gameobjectList[i].gameObject.GetComponent<AssetGameObject>().withdrawAssetinNFT == false)
+					// {
+					//    index = i;
+					//    print("Index found maching == false: "+index.ToString());
+					//}
+					//}
+					//catch { };
 
-					// The coin-balance data will match the order of the headings, which we use as the keys in the dictionary. 
-					for (int i = 0; i < words.Length; i++) workingList.Last().Add (headings [i], words[i]);
-				}
-				else
-				{
-					// TODO: Review and edit this block for NFT-parsing. 
-					
-					// if line starts with space it is the buggy line
+					//}
 
-					if (line.StartsWith ("[ OK ]") || line.StartsWith ("[PEND]"))
-					{
-						//Console.WriteLine("hi");
-						var words = Regex.Split (line, @"\t").Where (s => s != String.Empty).ToArray<string> ();
+					//						var newObject2 = gameobjectList[gameobjectList.Count - 1].GetComponent<AssetGameObject> ()
+					//								.CreateNewAssetInNFTGameobject (); //Instantiate(nfttGameobject, assetGameobject.transform.parent);
 
-						//Console.WriteLine("balanceOutput " + words[2] + " color " + words[1] + " name " + words[3]);
-/*
-						var newObject = Instantiate (nfttGameobject, assetGameobject.transform.parent);
-						newObject.SetActive (true);
-						gameobjectList.Add (newObject);
-						newObject.gameObject.GetComponent<AssetGameObject> ().nftId.text         = words[1];
-						newObject.gameObject.GetComponent<AssetGameObject> ().nftBalance.text    = words[2];
-						newObject.gameObject.GetComponent<AssetGameObject> ().nftTokenName.text  = words[3];
-						newObject.gameObject.GetComponent<AssetGameObject> ().isNFT              = true;
-						newObject.gameObject.GetComponent<AssetGameObject> ().withdrawAssetinNFT = false;
+					//print("Number of objects in generated object list: " + (gameobjectList.Count - 1).ToString());
 
-						newObject.gameObject.GetComponent<AssetGameObject> ().nftAmountToSend.GetComponent<InputField> ()
-								.placeholder.GetComponent<Text> ().text = "all";
+					//var newObject2 = Instantiate(assetInNfttGameobject, newObject.transform.parent);
+					//newObject2.SetActive(true);
 
-						newObject.gameObject.GetComponent<AssetGameObject> ().nftAmountToSend.GetComponent<InputField> ().readOnly =
-								true;
+					//newObject2.GetComponent<AssetGameObject>().AssetInNFT.SetActive(true);
 
-						var nftData = new NftData ();
-						nftData = GetImmutableData (words[1]);
+					//						string nftid = gameobjectList[gameobjectList.Count - 1].GetComponent<AssetGameObject> ().nftId.text;
 
-						newObject.gameObject.GetComponent<AssetGameObject> ().NFTTitle.text =
-								nftData.Properties.nftName.Description;
+					//gameobjectList.Add(newObject);
+					//						newObject2.gameObject.GetComponent<AssetGameObject> ().isNFT              = true;
+					//						newObject2.gameObject.GetComponent<AssetGameObject> ().withdrawAssetinNFT = true;
+					//						newObject2.gameObject.GetComponent<AssetGameObject> ().nftIDString        = nftid;
+					//						newObject2.gameObject.GetComponent<AssetGameObject> ().color.text         = words[1];
+					//						newObject2.gameObject.GetComponent<AssetGameObject> ().balance.text       = words[0];
+					//						newObject2.gameObject.GetComponent<AssetGameObject> ().tokenName.text     = words[2];
 
-						newObject.gameObject.GetComponent<AssetGameObject> ().NFTDescription.text =
-								nftData.Properties.nftDescription.Description;
-
-						newObject.gameObject.GetComponent<AssetGameObject> ().NFTIDataURLImage.text =
-								nftData.Properties.nftImage.Description;
-*/
-					}
-
-					if (line.StartsWith ("\t"))
-					{
-//						print ("-------------------hi----------------------" + "\n" + line);
-
-						var words = Regex.Split (line, @"\t").Where (s => s != String.Empty).ToArray<string> ();
-
-						//Console.WriteLine("balanceOutput " + words[0] + " color " + words[1] + " name " + words[2]);
-						//print("Amount of object in list: "+(gameobjectList.Count - 1).ToString());
-
-						// for (int i = 0 ; i < (gameobjectList.Count-1); i++) {
-						//   print(i.ToString());
-						// try
-						//{
-						//  if (gameobjectList[i].gameObject.GetComponent<AssetGameObject>().withdrawAssetinNFT == false)
-						// {
-						//    index = i;
-						//    print("Index found maching == false: "+index.ToString());
-						//}
-						//}
-						//catch { };
-
-						//}
-
-//						var newObject2 = gameobjectList[gameobjectList.Count - 1].GetComponent<AssetGameObject> ()
-//								.CreateNewAssetInNFTGameobject (); //Instantiate(nfttGameobject, assetGameobject.transform.parent);
-
-						//print("Number of objects in generated object list: " + (gameobjectList.Count - 1).ToString());
-
-						//var newObject2 = Instantiate(assetInNfttGameobject, newObject.transform.parent);
-						//newObject2.SetActive(true);
-
-						//newObject2.GetComponent<AssetGameObject>().AssetInNFT.SetActive(true);
-
-//						string nftid = gameobjectList[gameobjectList.Count - 1].GetComponent<AssetGameObject> ().nftId.text;
-
-						//gameobjectList.Add(newObject);
-//						newObject2.gameObject.GetComponent<AssetGameObject> ().isNFT              = true;
-//						newObject2.gameObject.GetComponent<AssetGameObject> ().withdrawAssetinNFT = true;
-//						newObject2.gameObject.GetComponent<AssetGameObject> ().nftIDString        = nftid;
-//						newObject2.gameObject.GetComponent<AssetGameObject> ().color.text         = words[1];
-//						newObject2.gameObject.GetComponent<AssetGameObject> ().balance.text       = words[0];
-//						newObject2.gameObject.GetComponent<AssetGameObject> ().tokenName.text     = words[2];
-
-						//newObject.gameObject.GetComponent<AssetGameObject>().amountToSend.GetComponent<InputField>().placeholder.GetComponent<Text>().text = "all";
-						//newObject.gameObject.GetComponent<AssetGameObject>().amountToSend.GetComponent<InputField>().readOnly = true;
-					}
+					//newObject.gameObject.GetComponent<AssetGameObject>().amountToSend.GetComponent<InputField>().placeholder.GetComponent<Text>().text = "all";
+					//newObject.gameObject.GetComponent<AssetGameObject>().amountToSend.GetComponent<InputField>().readOnly = true;
 				}
 			}
+		}
+
+		/// <summary>
+		/// Assigns entries in a string array it to the appropriate data structure in the wallet. Works for coins and NFTs.
+		/// </summary>
+		/// <param name="words">Array of strings, derived from a line of the CLI output</param>
+		/// <param name="headings">Array of strings representing the headings for the current mode (coin or NFT)</param>
+		/// <param name="workingList">Data structure in the wallet, depending on mode (coin or NFT)</param>
+		private void ParseBalanceEntry (string[] words, List<string> headings, List<Dictionary<string, string>> workingList)
+		{
+			// This version of the CLI seems to incorrectly display some NFTs in the output, so we check that the split
+			// line has the same number of entries as the previously parsed headings. If not, skip the line.
+			if (words.Length < headings.Count) return;
+			
+			// Add a new, blank entry to the end of workingList.
+			workingList.Add (new Dictionary<string, string> ());
+
+			// The line data will match the order of the headings, which we use as the keys in the dictionary. 
+			for (int i = 0; i < words.Length; i++) workingList.Last ().Add (headings[i], words[i]);
+		}
+
+		private bool CheckForHeadings (string lineStart, List<string> headings, string[] words)
+		{
+			// Extract the heading line of the table, to use as field names in the dictionary.
+			if (string.Equals (lineStart, fieldNames))
+			{
+				headings.Clear ();
+				foreach (var s in words) headings.Add (s);
+				return true;
+			}
+
+			return false;
 		}
 	}
 }

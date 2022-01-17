@@ -89,7 +89,7 @@ public class Wallet : MonoBehaviour
 	{
 		var NFTAddress = nftAddress;
 
-		var       url                    = "http://goshimmer.maikpiel.de:8080/ledgerstate/addresses/" + NFTAddress;
+		string    url                    = "http://goshimmer.maikpiel.de:8080/ledgerstate/addresses/" + NFTAddress;
 		WebClient client                 = new WebClient ();
 		string    immutableNFTTextBase64 = client.DownloadString (url);
 
