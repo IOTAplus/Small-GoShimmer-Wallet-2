@@ -46,13 +46,21 @@ namespace IOTAplus.LedgerAPI.GoShimmerCLI083
 				throw new System.ApplicationException("ERROR! No Wallet component found.");
 		}
 
-		
+	
 		public override void GetBalance ()
 		{
 			LedgerAPI.GoShimmerCLI083.GetBalance command = new GetBalance (this, _wallet);
 			StartCoroutine (command.Execute (_OnGetBalanceSuccess, _OnGetBalanceFailure));
 		}
+
 		
+		public override void SendToken (float amountToSend, string colorToSend, string destinationAddress)
+		{
+			LedgerAPI.GoShimmerCLI083.SendToken command = new SendToken (this, _wallet);
+			StartCoroutine (command.Execute (amountToSend, colorToSend, destinationAddress,
+					_OnSendTokenSuccess, _OnSendTokenFailure));
+		}
+
 		
 		/// <summary>
 		/// Calls the GoShimmer wallet CLI, passing in the provided parameters.

@@ -21,6 +21,8 @@ namespace IOTAplus.LedgerAPI.Wallet
 		
 		public string CoinBalancesJson => Json.ListDictionaryToJson (_coinBalances);
 		public string OwnedNFTsJson    => Json.ListDictionaryToJson (_ownedNfTs);
+		
+		private const string BALANCE_KEY = "BALANCE";
 
 		public Wallet ()
 		{
@@ -40,6 +42,23 @@ namespace IOTAplus.LedgerAPI.Wallet
 			// TODO: Validation checks for owned NFTs.
 			_ownedNfTs = newOwnedNfts;
 			return true;
+		}
+
+		public bool CheckForSufficientBalance (string color, float amount)
+		{
+			string balance = "";
+			foreach (Dictionary<string,string> d in _coinBalances)
+			{
+				if (d.ContainsValue (color))
+					balance = d[BALANCE_KEY];
+			}
+
+			if (balance == "") return false;
+			Debug.Log ("balance = " + balance);
+			balance = balance.Split (' ')[0];
+			float b = float.Parse (balance);
+			Debug.Log ("b = " + b);
+			return b >= amount;
 		}
 	}
 }

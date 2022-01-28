@@ -75,5 +75,10 @@ namespace IOTAplus.LedgerAPI.DummyLedger
 			
 			_OnGetBalanceSuccess?.Invoke ();
 		}
+
+		public override void SendToken (float amountToSend, string colorToSend, string destinationAddress)
+		{
+			_OnSendTokenSuccess?.Invoke ();
+		}
 	}
 }

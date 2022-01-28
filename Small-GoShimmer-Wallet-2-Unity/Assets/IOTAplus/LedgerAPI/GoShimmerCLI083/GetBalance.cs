@@ -40,7 +40,7 @@ namespace IOTAplus.LedgerAPI.GoShimmerCLI083
 			onSuccess?.Invoke ();
 		}
 		
-		private void ParseBalanceOutput (string balanceOutput)
+		private void ParseBalanceOutput (string output)
 		{ 
 /*
 			>>> Example output for "Balance" command >>>
@@ -71,7 +71,7 @@ namespace IOTAplus.LedgerAPI.GoShimmerCLI083
 			List<string> headings = new List<string> ();
 
 			// This foreach splits the output into an array of lines, to parse them one-by-one.
-			foreach (var line in balanceOutput.Split (new string[] { "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries))
+			foreach (var line in output.Split (new string[] { "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries))
 			{
 				// This parser will compare the first five characters of the line to determine appropriate actions.
 				var lineStart = line.Substring (0, 5).ToUpper();

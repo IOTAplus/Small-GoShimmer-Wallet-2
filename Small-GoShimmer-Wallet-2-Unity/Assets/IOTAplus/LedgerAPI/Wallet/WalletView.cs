@@ -9,7 +9,7 @@ namespace IOTAplus.LedgerAPI.Wallet
 	/// </summary>
 	public class WalletView : MonoBehaviour
 	{
-		private IWallet       _wallet;
+		private Wallet       _wallet;
 		private LedgerAPIBase _ledger;
 		private Text          _display;
 

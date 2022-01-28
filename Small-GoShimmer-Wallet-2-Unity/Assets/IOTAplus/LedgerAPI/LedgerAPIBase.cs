@@ -18,7 +18,7 @@ namespace IOTAplus.LedgerAPI
 	public abstract class LedgerAPIBase : MonoBehaviour, ILedgerAPI
 	{
 		
-#region GetBalance
+	#region GetBalance
 		public virtual void GetBalance () {}
 
 		protected    Action _OnGetBalanceSuccess;
@@ -34,7 +34,25 @@ namespace IOTAplus.LedgerAPI
 			add    => _OnGetBalanceFailure += value;
 			remove => _OnGetBalanceFailure -= value;
 		}
-#endregion
+	#endregion
+
+	#region SendToken
+		public virtual void SendToken (float amountToSend, string colorToSend, string destinationAddress) {}
+
+		protected Action _OnSendTokenSuccess;
+		public event Action OnSendTokenSuccess
+		{
+			add    => _OnSendTokenSuccess += value;
+			remove => _OnSendTokenSuccess -= value;
+		}
+
+		protected Action _OnSendTokenFailure;
+		public event Action OnSendTokenFailure
+		{
+			add    => _OnSendTokenFailure += value;
+			remove => _OnSendTokenFailure -= value;
+		}
+	#endregion
 		
 	}
 }
