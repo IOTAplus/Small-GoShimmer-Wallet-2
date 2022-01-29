@@ -32,9 +32,9 @@ RectTransform:
   m_Father: {fileID: 499476694956221884}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: -10.740101}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 89.00874, y: 21.480202}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &499476693376500344
@@ -302,7 +302,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &499476694462856293
 RectTransform:
   m_ObjectHideFlags: 0
@@ -320,9 +320,9 @@ RectTransform:
   m_Father: {fileID: 499476694925351436}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 337.50174, y: -40.622017}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 665.0035, y: 61.244034}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &499476694462856292
@@ -385,9 +385,9 @@ RectTransform:
   m_Father: {fileID: 499476694956221884}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 44.504364, y: -36.66084}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 89.00873, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &499476694806419990
@@ -574,16 +574,27 @@ MonoBehaviour:
   color: {fileID: 5719610676648148596}
   balance: {fileID: 3123951244221850296}
   tokenName: {fileID: 3123951243503555696}
+  NFTTitle: {fileID: 0}
+  NFTDescription: {fileID: 0}
+  NFTIDataURLImage: {fileID: 0}
+  NFTImageTitle: {fileID: 0}
+  NFTImageDescription: {fileID: 0}
   nftIDString: 
   nftAmountToSend: {fileID: 0}
   nftAddressWhereToSend: {fileID: 0}
   anmountToSend: {fileID: 499476694806419992}
   addressWhereToSend: {fileID: 5719610676915223685}
   AssetInNFT: {fileID: 0}
+  ImageGameobject: {fileID: 0}
+  NFTImageGameobject: {fileID: 0}
   isNFT: 0
   withdrawAssetinNFT: 0
   toggle: {fileID: 0}
   assetInNFT: {fileID: 0}
+  correctedHeight: 0
+  correctedWidth: 0
+  RawImage: {fileID: 0}
+  m_uniGifImage: {fileID: 0}
 --- !u!222 &2460160507270996480
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -654,9 +665,9 @@ RectTransform:
   m_Father: {fileID: 499476694462856293}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 44.504364, y: -35.323296}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 89.00873, y: 51.841476}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &499476694956221883
@@ -858,9 +869,9 @@ RectTransform:
   m_Father: {fileID: 499476694462856293}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 272.47913, y: -34.563908}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 341.75543, y: 53.360252}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5719610676370763579
@@ -922,9 +933,9 @@ RectTransform:
   m_Father: {fileID: 3123951243229869249}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 103.23065, y: -12.0757885}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 206.4613, y: 24.151577}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3123951242982164362
@@ -1051,9 +1062,9 @@ RectTransform:
   m_Father: {fileID: 499476694462856293}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 559.1802, y: -33.069862}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 206.46133, y: 56.348343}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3123951243229869250
@@ -1504,9 +1515,9 @@ RectTransform:
   m_Father: {fileID: 3123951243229869249}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 103.23065, y: -40.24996}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 206.4613, y: 26.089386}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5719610676103436432
@@ -1944,9 +1955,9 @@ RectTransform:
   m_Father: {fileID: 499476695483733155}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 171.50911, y: -37.63283}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 343.01822, y: 29.889915}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5719610676915223691
@@ -2081,9 +2092,9 @@ RectTransform:
   m_Father: {fileID: 499476695483733155}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 75.24658, y: -10.952705}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 150.49316, y: 21.90541}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5719610677062652727
@@ -2161,9 +2172,9 @@ RectTransform:
   m_Father: {fileID: 5719610676103436524}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50.115326, y: -13.044693}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 24.75655}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5719610677181962169
@@ -2369,9 +2380,9 @@ RectTransform:
   m_Father: {fileID: 5719610676103436524}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 156.34598, y: -13.044693}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 24.75655}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8341718510195725768

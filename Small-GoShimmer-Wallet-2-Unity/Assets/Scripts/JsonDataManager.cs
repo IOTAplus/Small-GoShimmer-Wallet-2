@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
@@ -7,9 +8,14 @@ public class JsonDataManager : MonoBehaviour
 {
     // Create a field for the save file.
     [SerializeField]
-    private string saveFile = Application.persistentDataPath + "/nftData.json";
+    private string saveFile;
 
     public NftData nftData;
+
+    private void Awake ()
+    {
+	    saveFile = Application.persistentDataPath + "/nftData.json";
+    }
 
     public void ReadFile()
     {
