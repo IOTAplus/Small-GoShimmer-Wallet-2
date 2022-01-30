@@ -41,7 +41,7 @@ namespace IOTAplus.LedgerAPI.DummyLedger
 				}
 			};
 
-			_wallet.SetCoinBalances (coinBalances);
+			_wallet.SetTokenBalances (coinBalances);
 
 			var OwnedNFTs = new List<Dictionary<string, string>> ()
 			{

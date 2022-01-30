@@ -32,7 +32,7 @@ namespace IOTAplus.LedgerAPI.Wallet
 		
 		public void WalletCoinBalanceJson ()
 		{
-			_display.text = _wallet.CoinBalancesJson;
+			_display.text = _wallet.TokenBalancesJson;
 		}
 
 		public void WalletOwnedNFTsJson ()

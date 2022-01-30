@@ -11,7 +11,7 @@ using System.Text;
 using System.Collections;
 
 [Serializable]
-public class Wallet : MonoBehaviour
+public class TestWallet : MonoBehaviour
 {
 	//public Color schwarz;
 	//public Color grau;

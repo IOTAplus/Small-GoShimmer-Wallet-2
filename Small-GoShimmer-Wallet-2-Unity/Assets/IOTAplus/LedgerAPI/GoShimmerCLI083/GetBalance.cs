@@ -82,7 +82,7 @@ namespace IOTAplus.LedgerAPI.GoShimmerCLI083
 				switch (lineStart)
 				{
 					case BALANCES_HEADER:
-						workingList = _wallet.CoinBalances;
+						workingList = _wallet.TokenBalances;
 						workingList.Clear ();
 						continue;
 					case NFT_HEADER:

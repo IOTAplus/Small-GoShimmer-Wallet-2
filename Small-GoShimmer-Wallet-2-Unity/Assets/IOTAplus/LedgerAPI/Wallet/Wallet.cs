@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using IOTAplus.Utilities;
 using UnityEngine;
 
@@ -12,28 +13,29 @@ namespace IOTAplus.LedgerAPI.Wallet
 	[DisallowMultipleComponent]
 	public class Wallet : MonoBehaviour, IWallet
 	{
-		protected List<Dictionary<string, string>> _coinBalances;
+		protected List<Dictionary<string, string>> _tokenBalances;
 		protected List<Dictionary<string, string>> _ownedNfTs;
 
-		public List<Dictionary<string, string>> CoinBalances => _coinBalances;
+		public List<Dictionary<string, string>> TokenBalances => _tokenBalances;
 
 		public List<Dictionary<string, string>> OwnedNFTs => _ownedNfTs;
 		
-		public string CoinBalancesJson => Json.ListDictionaryToJson (_coinBalances);
+		public string TokenBalancesJson => Json.ListDictionaryToJson (_tokenBalances);
 		public string OwnedNFTsJson    => Json.ListDictionaryToJson (_ownedNfTs);
 		
-		private const string BALANCE_KEY = "BALANCE";
-
+		private const string BALANCE_KEY   = "BALANCE";
+		private const string COLORHASH_KEY = "COLOR";
+		
 		public Wallet ()
 		{
-			_coinBalances = new List<Dictionary<string, string>> ();
+			_tokenBalances = new List<Dictionary<string, string>> ();
 			_ownedNfTs    = new List<Dictionary<string, string>> ();
 		}
 
-		public bool SetCoinBalances (List<Dictionary<string, string>> newCoinBalances)
+		public bool SetTokenBalances (List<Dictionary<string, string>> newTokenBalances)
 		{
 			// TODO: Validation checks for coin balances.
-			_coinBalances = newCoinBalances;
+			_tokenBalances = newTokenBalances;
 			return true;
 		}
 
@@ -47,7 +49,7 @@ namespace IOTAplus.LedgerAPI.Wallet
 		public bool CheckForSufficientBalance (string color, float amount)
 		{
 			string balance = "";
-			foreach (Dictionary<string,string> d in _coinBalances)
+			foreach (Dictionary<string,string> d in _tokenBalances)
 			{
 				if (d.ContainsValue (color))
 					balance = d[BALANCE_KEY];
@@ -59,6 +61,13 @@ namespace IOTAplus.LedgerAPI.Wallet
 			float b = float.Parse (balance);
 			Debug.Log ("b = " + b);
 			return b >= amount;
+		}
+
+		public string GetColorHash (string tokenName)
+		{
+			var token = _tokenBalances.FirstOrDefault (d => d.ContainsValue (tokenName));
+
+			return token?[COLORHASH_KEY];
 		}
 	}
 }

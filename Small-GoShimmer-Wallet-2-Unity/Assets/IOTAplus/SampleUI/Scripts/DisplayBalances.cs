@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using IOTAplus.LedgerAPI.Wallet;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -14,19 +15,21 @@ namespace IOTAplus.SampleUI
 		[SerializeField]
 		private TokenListing _tokenListing;
 
-		private LedgerAPI.Wallet.Wallet _wallet;
-		private List <GameObject>       _listings = new List<GameObject> ();
+		private Wallet           _wallet;
+		private List<GameObject> _listings = new List<GameObject> ();
 
 		private void Awake ()
 		{
-			_wallet = FindObjectOfType<LedgerAPI.Wallet.Wallet> ();
+			_wallet = FindObjectOfType<Wallet> ();
 		}
 
 		public void UpdateOnScreenTokenBalances ()
 		{
+			foreach (var l in _listings) GameObject.Destroy (l);
+			
 			_listings.Clear ();
 
-			foreach (var token in _wallet.CoinBalances)
+			foreach (var token in _wallet.TokenBalances)
 			{
 				var newListing = Instantiate (_tokenListing, _listingParent);
 				_listings.Add (newListing.gameObject);

@@ -8,13 +8,13 @@ namespace IOTAplus.LedgerAPI.Wallet
 	/// </summary>
 	public interface IWallet
 	{
-		List <Dictionary<string, string>> CoinBalances { get; }
+		List <Dictionary<string, string>> TokenBalances { get; }
 		List <Dictionary<string, string>> OwnedNFTs    { get; }
 
-		string CoinBalancesJson { get; }
+		string TokenBalancesJson { get; }
 		string OwnedNFTsJson    { get; }
 		
-		bool SetCoinBalances (List<Dictionary<string, string>> newCoinBalances);
+		bool SetTokenBalances (List<Dictionary<string, string>> newTokenBalances);
 		bool SetOwnedNfts    (List<Dictionary<string, string>> newOwnedNfts);
 
 		/// <summary>
@@ -25,5 +25,7 @@ namespace IOTAplus.LedgerAPI.Wallet
 		/// <param name="amount">The minimum balance required for the method to return TRUE</param>
 		/// <returns>TRUE if balance equals or exceed specified amount; FALSE otherwise.</returns>
 		bool CheckForSufficientBalance (string color, float amount);
+
+		string GetColorHash (string tokenName);
 	}
 }

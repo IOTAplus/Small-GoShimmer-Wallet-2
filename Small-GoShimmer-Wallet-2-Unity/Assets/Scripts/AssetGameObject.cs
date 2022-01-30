@@ -41,7 +41,7 @@ public class AssetGameObject : MonoBehaviour
 
     public GameObject assetInNFT;
 
-    Wallet wallet;
+    TestWallet wallet;
 
     public float correctedHeight;
     public float correctedWidth;
@@ -54,7 +54,7 @@ public class AssetGameObject : MonoBehaviour
 
     void Start()
     {
-        wallet = GameObject.Find("Scripts").GetComponent<Wallet>();
+        wallet = GameObject.Find("Scripts").GetComponent<TestWallet>();
     }
 
     public void SendFunds()
