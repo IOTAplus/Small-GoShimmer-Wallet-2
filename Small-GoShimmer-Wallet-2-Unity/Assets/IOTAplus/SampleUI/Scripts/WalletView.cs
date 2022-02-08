@@ -1,21 +1,21 @@
 using UnityEngine;
 using UnityEngine.UI;
+using IOTAplus.LedgerAPI.WalletAPI;
 
-namespace IOTAplus.LedgerAPI.Wallet
+namespace IOTAplus.LedgerAPI.SampleUI
 {
 	/// <summary>
 	/// WalletView is a simple set of display methods to show wallet balances on-screen.
-	/// It's a temporary class for development purposes and is unlikely to be kept in the final API.
 	/// </summary>
 	public class WalletView : MonoBehaviour
 	{
-		private Wallet       _wallet;
+		private Wallet        _wallet;
 		private LedgerAPIBase _ledger;
 		private Text          _display;
 
 		private void Awake ()
 		{
-			_wallet = FindObjectOfType<Wallet> ();
+			_wallet = FindObjectOfType<WalletAPI.Wallet> ();
 			if (_wallet == null) Debug.LogError ("Cannot find wallet.");
 
 			_ledger = FindObjectOfType<LedgerAPIBase> ();

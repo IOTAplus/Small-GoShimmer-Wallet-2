@@ -3,7 +3,7 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using IOTAplus.LedgerAPI.Wallet;
+using IOTAplus.LedgerAPI.WalletAPI;
 
 
 namespace IOTAplus.LedgerAPI.GoShimmerCLI083

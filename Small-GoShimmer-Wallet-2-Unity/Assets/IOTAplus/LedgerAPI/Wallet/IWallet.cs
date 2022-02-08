@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace IOTAplus.LedgerAPI.Wallet
+namespace IOTAplus.LedgerAPI.WalletAPI
 {
 	/// <summary>
 	/// IWallet is an Interface for a crypto-wallet. It is the basis for all wallet-API interactions

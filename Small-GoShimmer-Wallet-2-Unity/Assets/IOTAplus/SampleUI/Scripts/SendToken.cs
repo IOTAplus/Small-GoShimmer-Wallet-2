@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using IOTAplus.LedgerAPI;
-using IOTAplus.LedgerAPI.Wallet;
+using IOTAplus.LedgerAPI.WalletAPI;
 
 namespace IOTAplus.SampleUI
 {

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-using IOTAplus.LedgerAPI.Wallet;
+using IOTAplus.LedgerAPI.WalletAPI;
 
 
 namespace IOTAplus.LedgerAPI.DummyLedger

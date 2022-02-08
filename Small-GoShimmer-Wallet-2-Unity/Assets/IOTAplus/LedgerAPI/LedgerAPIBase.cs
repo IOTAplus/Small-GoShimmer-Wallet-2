@@ -13,7 +13,7 @@ namespace IOTAplus.LedgerAPI
 	/// For consistency, all concrete implementations of ILedgerAPI should inherit from this LedgerAPIBase
 	/// rather than implementing ILedgerAPI directly. 
 	/// </summary>
-	[RequireComponent(typeof(Wallet.Wallet))]
+	[RequireComponent(typeof(WalletAPI.Wallet))]
 	[DisallowMultipleComponent]
 	public abstract class LedgerAPIBase : MonoBehaviour, ILedgerAPI
 	{

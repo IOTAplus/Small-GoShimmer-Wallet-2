@@ -3,7 +3,7 @@ using System.Collections;
 using System.Diagnostics;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
-using IOTAplus.LedgerAPI.Wallet;
+using IOTAplus.LedgerAPI.WalletAPI;
 
 
 namespace IOTAplus.LedgerAPI.GoShimmerCLI083
@@ -21,7 +21,6 @@ namespace IOTAplus.LedgerAPI.GoShimmerCLI083
 	/// The GoShimmer CLI executables can be downloaded from https://github.com/iotaledger/goshimmer/releases.
 	/// The CLI executables must be in ./Assets/StreamingAssets.
 	/// </summary>
-	[ExecuteAlways]
 	public class GoShimmerCLI083 : LedgerAPIBase
 	{
 		private IWallet _wallet;

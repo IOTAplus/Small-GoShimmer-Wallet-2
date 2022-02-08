@@ -24,20 +24,3 @@ namespace IOTAplus.LedgerAPI
 		bool withdrawAssetinNFT { get; set; }
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

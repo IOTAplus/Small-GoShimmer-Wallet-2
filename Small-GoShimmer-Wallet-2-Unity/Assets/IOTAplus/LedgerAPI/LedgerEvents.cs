@@ -1,14 +1,12 @@
-using System;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 
 namespace IOTAplus.LedgerAPI
 {
 	/// <summary>
 	/// LedgerEvents is used by Unity designers who wish to wire up Ledger API commands and events from within the Editor.
-	/// Place this component on the same component as the Ledger API and wire any GameObject's interaction event to
-	/// the commands on this Component, and and GameObject's Component's Method to the provided UnityEvents
+	/// Place this component on the same GameObject as the Ledger API and wire any GameObject's interaction event to
+	/// the commands on this component, and any GameObject's component's method to the provided UnityEvents
 	/// in the Inspector.
 	///
 	/// This is a separate component so that, if a developer wishes, the Ledger API can be removed from the GameObject

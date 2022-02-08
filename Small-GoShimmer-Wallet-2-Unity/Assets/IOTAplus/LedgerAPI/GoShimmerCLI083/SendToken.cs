@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-using IOTAplus.LedgerAPI.Wallet;
+using IOTAplus.LedgerAPI.WalletAPI;
 
 namespace IOTAplus.LedgerAPI.GoShimmerCLI083
 {

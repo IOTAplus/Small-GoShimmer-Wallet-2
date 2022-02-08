@@ -54,7 +54,7 @@ public class UniGifImage : MonoBehaviour
     private bool m_outputDebugLog;
 
     // Decoded GIF texture list
-    private List<UniGif.GifTexture> m_gifTextureList;
+    private List<IOTAplus.Utilities.UniGif.UniGif.GifTexture> m_gifTextureList;
     // Delay time
     private float m_delayTime;
     // Texture index
@@ -135,7 +135,7 @@ public class UniGifImage : MonoBehaviour
             case State.Playing:
                 if (m_rawImage == null || m_gifTextureList == null || m_gifTextureList.Count <= 0)
                 {
-                    return;
+                    return;  
                 }
                 if (m_delayTime > Time.time)
                 {
@@ -229,7 +229,7 @@ public class UniGifImage : MonoBehaviour
             nowState = State.Loading;
 
             // Get GIF textures
-            yield return StartCoroutine(UniGif.GetTextureListCoroutine(www.bytes, (gifTexList, loopCount, width, height) =>
+            yield return StartCoroutine(IOTAplus.Utilities.UniGif.UniGif.GetTextureListCoroutine(www.bytes, (gifTexList, loopCount, width, height) =>
             {
                 if (gifTexList != null)
                 {
@@ -239,7 +239,7 @@ public class UniGifImage : MonoBehaviour
                     this.height = height;
                     nowState = State.Ready;
 
-                    m_imgAspectCtrl.FixAspectRatio(width, height);
+                    m_imgAspectCtrl?.FixAspectRatio(width, height);
 
                     if (m_rotateOnLoading)
                     {

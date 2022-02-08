@@ -3,7 +3,7 @@ using System.Linq;
 using IOTAplus.Utilities;
 using UnityEngine;
 
-namespace IOTAplus.LedgerAPI.Wallet
+namespace IOTAplus.LedgerAPI.WalletAPI
 {
 	/// <summary>
 	/// Wallet contains only wallet-data and methods to read, set or reset that data.
@@ -23,8 +23,9 @@ namespace IOTAplus.LedgerAPI.Wallet
 		public string TokenBalancesJson => Json.ListDictionaryToJson (_tokenBalances);
 		public string OwnedNFTsJson    => Json.ListDictionaryToJson (_ownedNfTs);
 		
-		private const string BALANCE_KEY   = "BALANCE";
-		private const string COLORHASH_KEY = "COLOR";
+		protected const string BALANCE_KEY   = "BALANCE";
+		protected const string COLORHASH_KEY = "COLOR";
+		
 		
 		public Wallet ()
 		{
